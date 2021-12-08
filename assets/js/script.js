@@ -92,7 +92,23 @@ function initPage(){
                                 forecastDateEl.innerHTML = forecastMonth + '/' + forecastDay + '/' + forecastYear;
                                 forecastEls[i].append(forecastDateEl);
 
-                                // need to add weather icon
+                                // data for 5 day forecast
+                                // icon for weather
+                                const forecastImgEl = document.createElement('img');
+                                forecastImgEl.setAttribute('src', 'https://openweathermap.org/img/wn/' + response.data.list[forecastIndex].weather[0].icon + '@2x.png');
+                                forecastImgEl.setAttribute('alt', response.data.list[forecastIndex].weather[0].description);
+                                // append images to 5 day forecast
+                                forecastEls[i].append(forecastImgEl);
+                                // temp data for 5 day forecast
+                                const forecastTempEl = document.createElement('p');
+                                forecastTempEl.innerHTML = 'Temp: ' + k2f(response.data.list[forecastIndex].main.temp) + ' &#176F';
+                                // append temp data to 5 day forecast
+                                forecastEls[i].append(forecastTempEl);
+                                // humidity data for 5 day forecast
+                                const forecastHumidityEl = document.createElement('p');
+                                forecastHumidityEl.innerHTML = 'Humidity ' + response.data.list[forecastIndex].main.humidity + '%';
+                                // append humidity data to 5 day forecast
+                                forecastEls[i].append(forecastHumidityEl);
                             }
                         })
             })
@@ -104,14 +120,14 @@ function initPage(){
         getWeather(searchTerm);
         searchHistory.push(searchTerm);
         localStorage.setItem('search', JSON.stringify(searchHistory));
-        
+        renderSearchHistory();
     })
 
     // Clear History button function
     clearEl.addEventListener('click', function() {
         localStorage.clear();
         searchHistory = [];
-        
+        renderSearchHistory();
     })
 
     // Kelvin to fahrenheit function (data.main.temp pulls kelvin by default)
@@ -119,7 +135,26 @@ function initPage(){
         return Math.floor((k - 273.15) * 1.8 + 32);
     }
 
-    
-}
+    // loop through search history and append to #history form
+    function renderSearchHistory() {
+        historyEl.innerHTML = '';
+        for (let i = 0; i < searchHistory.length; i++) {
+            const historyItem = document.createElement('input');
+            historyItem.setAttribute('type', 'text');
+            historyItem.setAttribute('readonly', true);
+            historyItem.setAttribute('class', 'form-control d-block bg-white');
+            historyItem.setAttribute('value', searchHistory[i]);
+            historyItem.addEventListener('click', function () {
+                getWeather(historyItem.value);
+            })
+            historyEl.append(historyItem);
+        }
+    }
 
+    // call on page load so history is there on refresh
+    renderSearchHistory();
+    
+    console.log(searchHistory);
+}
+// call initPage on page load
 initPage();
