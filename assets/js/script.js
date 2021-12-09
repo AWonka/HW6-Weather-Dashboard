@@ -56,13 +56,13 @@ function initPage(){
                         let UVIndex = document.createElement('span');
                         // When UV index is favorable the color is green, when it's moderate the color is yellow, when it's severe shows red
                         if (response.data[0].value < 4) {
-                            UVIndex.setAttribute ('class', 'badge badge-success');
+                            UVIndex.setAttribute ('class', 'badge alert-success');
                         } else if (response.data[0].value < 8) {
-                            UVIndex.setAttribute ('class', 'badge badge-warning');
+                            UVIndex.setAttribute ('class', 'badge alert-warning');
                         } else {
-                            UVIndex.setAttribute ('class', 'badge badge-danger');
+                            UVIndex.setAttribute ('class', 'badge alert-danger');
                         }
-                        console.log(response.data[0].value);
+                        console.log(response.data[0].value)
                         // print UV index
                         UVIndex.innerHTML = response.data[0].value;
                         currentUVEl.innerHTML = 'UV Index: ';
