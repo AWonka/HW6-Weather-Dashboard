@@ -22,8 +22,12 @@ const apiKey = 'af48d67960dc6c043fc7658bf1e89f7f';
 
 searchBtn.addEventListener('click', function() {
     var searchValue = cityInput.value;
-    var cityName = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=" + apiKey;
-    getLatLong(cityName);
+    var cityNameP = document.createElement('p');
+    cityNameP.textContent = searchValue;
+    cityNameP.setAttribute('class', 'text-white text-uppercase');
+    cityName.append(cityNameP)
+    var city = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=" + apiKey;
+    getLatLong(city);
 });
 
 function getLatLong(link) {
@@ -45,6 +49,22 @@ function getForecast(link) {
     fetch(link)
         .then(res => res.json())
         .then(data => {
+            todayWeather.classList.remove('d-none')
+            var currentDate = new Date(data.current.dt * 1000)
+            const currentDay = currentDate.getDate();
+            const currentMonth = currentDate.getMonth() +1;
+            const currentYear = currentDate.getFullYear();
+            var cityDate = document.createElement('p');
+            cityDate.textContent = "(" + currentMonth + "/" + currentDay + "/" + currentYear + ")";
+            cityDate.setAttribute('class', 'text-white');
+            cityName.append(cityDate)
+            console.log(currentDay)
+            console.log(currentMonth)
+            console.log(currentYear)
+            console.log(data.name)
+            console.log(currentDate)
             console.log(data)
+            console.log(data.current.dt)
+            console.log(data.daily[0].dt)
         })
 }
