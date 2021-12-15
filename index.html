@@ -15,15 +15,15 @@
             <div class="col-4 bg-secondary bg-gradient bg-opacity-25">
                 <h5 class="mt-1">Search for a City: </h5>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Enter a City" aria-label="Enter a City" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                    <input id = "city-input" type="text" class="form-control" placeholder="Enter a City" aria-label="Enter a City" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary me-1 rounded" type="button" id="button-addon2">Search</button>
                 </div>
                 <form id="history"></form>
             </div>
             <div class="col-8 bg-light row">
-                <div class="card col-lg-4" id="today-weather">
+                <div class="card bg-light col-lg-4 border-0 bg d-none" id="today-weather">
                     <img src="" class="card-img-top" alt="" id="today-pic">
-                    <div class="card-body">
+                    <div class="card-body bg-info rounded">
                         <h3 class="city-name text-center mb-2" id="city-name">Atlanta</h3>
                         <p class="temperature" id="temp">test</p>
                         <p class="humidity" id="humidity">test</p>
@@ -31,16 +31,16 @@
                         <p class="uv-index" id="uv">test</p>
                     </div>
                 </div>
-                <div class="col-lg-8" id="fiveday-forecast">
+                <div class="col-lg-8 d-none" id="fiveday-forecast">
                     <div class="text-center pt-1 pb-1 bg-warning text-white mt-1" id ="fiveday-title">
                         <h3>5-Day Forecast</h3>
                     </div>
                     <div class="row">
-                    <div class="col-sm"><p>test</p></div>
-                    <div class="col-sm"><p>test</p></div>
-                    <div class="col-sm"><p>test</p></div>
-                    <div class="col-sm"><p>test</p></div>
-                    <div class="col-sm"><p>test</p></div>
+                    <div class="col-sm bg-info m-1 rounded 5-day"><p>test</p></div>
+                    <div class="col-sm bg-info m-1 rounded 5-day"><p>test</p></div>
+                    <div class="col-sm bg-info m-1 rounded 5-day"><p>test</p></div>
+                    <div class="col-sm bg-info m-1 rounded 5-day"><p>test</p></div>
+                    <div class="col-sm bg-info m-1 rounded 5-day"><p>test</p></div>
                     </div>
                 </div>
             </div>
