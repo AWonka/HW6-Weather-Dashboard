@@ -1,7 +1,7 @@
 // Search and localStorage variables
 const cityInput = document.getElementById('city-input');
 const searchBtn = document.getElementById('button-addon2');
-const searchHistory = document.getElementById('history');
+const historyEl = document.getElementById('history');
 // Current weather variables
 const todayWeather = document.getElementById('today-weather');
 const todayPic = document.getElementById('today-pic');
@@ -21,17 +21,50 @@ const fifthDayEl = document.getElementById('fifthDay');
 // API Key
 const apiKey = 'af48d67960dc6c043fc7658bf1e89f7f';
 
+var searchHistory = JSON.parse(localStorage.getItem('search')) || [];
+
 // Make sure to remove d-none from todayWeather(id=today-weather) and fivedayForecast(id=fiveday-forecast)
 
 // event listener for search functionality and pass that value off to the function
 
 searchBtn.addEventListener('click', function() {
     var searchValue = cityInput.value;
+    searchHistory.push(searchValue);
+    localStorage.setItem('search', JSON.stringify(searchHistory));
     cityName.innerHTML = searchValue;
     cityName.setAttribute('class', 'text-white text-uppercase text-center');
     var city = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=" + apiKey;
     getLatLon(city);
+    printSearchHistory();
 });
+
+function printSearchHistory() {
+    historyEl.innerHTML = '';
+    for (let i = 0; i <searchHistory.length; i++) {
+        const historyList = document.createElement('input');
+        historyList.setAttribute('type', 'text');
+        historyList.setAttribute('readonly', true);
+        historyList.setAttribute('class', 'form-control d-block text-white text-center text-uppercase bg-dark customCSS');
+        historyList.setAttribute('value', searchHistory[i]);
+        historyList.innerHTML = historyList.value;
+        historyList.addEventListener('click', function(){
+            cityName.innerHTML = historyList.value;
+            cityName.setAttribute('class', 'text-white text-uppercase text-center');
+            var searchedCity = "https://api.openweathermap.org/data/2.5/weather?q=" + historyList.value + "&appid=" + apiKey;
+            getLatLon(searchedCity);
+            console.log(searchHistory);
+        })
+        historyEl.append(historyList);
+        if (searchHistory.length > 14) {
+            localStorage.clear();
+            searchHistory = [];
+            window.alert('History succeeded maximum limit, refreshing page. (Max = 14)');
+            location.reload();
+        }
+        console.log(historyList.value)
+    }
+}
+
 
 function getLatLon(link) {
     fetch(link)
@@ -225,6 +258,7 @@ function getForecast(link) {
             let fifthDayPicVal = data.daily[5].weather[0].icon;
             fifthDayPic.setAttribute('src', 'https://openweathermap.org/img/wn/' + fifthDayPicVal + '@2x.png');
             fifthDayPic.setAttribute('alt', data.daily[5].weather[0].description);
+            fifthDayPic.setAttribute('class', 'mx-auto d-block')
             fifthDayEl.append(fifthDayPic);
             // fifth day date
             var fifthDayDate = new Date(data.daily[5].dt * 1000);
@@ -234,7 +268,7 @@ function getForecast(link) {
             var fifthDate = document.createElement('p');
             fifthDate.textContent = 
             "(" + fifthDayMonth + "/" + fifthDayDay + "/" + fifthDayYear + ")";
-            fifthDate.setAttribute('class', 'text-white');
+            fifthDate.setAttribute('class', 'text-white text-center');
             fifthDayEl.append(fifthDate);
             // fifth day temp
             var fifthDayTemp = document.createElement('p');
@@ -253,3 +287,5 @@ function getForecast(link) {
             fifthDayEl.append(fifthDayHum);
         })
 }
+
+printSearchHistory();
