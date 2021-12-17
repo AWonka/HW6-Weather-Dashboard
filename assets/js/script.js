@@ -134,6 +134,7 @@ function getForecast(link) {
             let firstDayPicVal = data.daily[1].weather[0].icon;
             firstDayPic.setAttribute('src', 'https://openweathermap.org/img/wn/' + firstDayPicVal + '@2x.png');
             firstDayPic.setAttribute('alt', data.daily[1].weather[0].description);
+            firstDayPic.setAttribute('class', 'mx-auto d-block')
             firstDayEl.append(firstDayPic);
             // first day date
             var firstDayDate = new Date(data.daily[1].dt * 1000);
@@ -143,7 +144,7 @@ function getForecast(link) {
             var firstDate = document.createElement('p');
             firstDate.textContent = 
             "(" + firstDayMonth + "/" + firstDayDay + "/" + firstDayYear + ")";
-            firstDate.setAttribute('class', 'text-white');
+            firstDate.setAttribute('class', 'text-white text-center');
             firstDayEl.append(firstDate);
             // first day temp
             var firstDayTemp = document.createElement('p');
@@ -165,6 +166,7 @@ function getForecast(link) {
             let secondDayPicVal = data.daily[2].weather[0].icon;
             secondDayPic.setAttribute('src', 'https://openweathermap.org/img/wn/' + secondDayPicVal + '@2x.png');
             secondDayPic.setAttribute('alt', data.daily[2].weather[0].description);
+            secondDayPic.setAttribute('class', 'mx-auto d-block')
             secondDayEl.append(secondDayPic);
             // second day date
             var secondDayDate = new Date(data.daily[2].dt * 1000);
@@ -174,7 +176,7 @@ function getForecast(link) {
             var secondDate = document.createElement('p');
             secondDate.textContent = 
             "(" + secondDayMonth + "/" + secondDayDay + "/" + secondDayYear + ")";
-            secondDate.setAttribute('class', 'text-white');
+            secondDate.setAttribute('class', 'text-white text-center');
             secondDayEl.append(secondDate);
             // second day temp
             var secondDayTemp = document.createElement('p');
@@ -196,6 +198,7 @@ function getForecast(link) {
             let thirdDayPicVal = data.daily[3].weather[0].icon;
             thirdDayPic.setAttribute('src', 'https://openweathermap.org/img/wn/' + thirdDayPicVal + '@2x.png');
             thirdDayPic.setAttribute('alt', data.daily[3].weather[0].description);
+            thirdDayPic.setAttribute('class', 'mx-auto d-block')
             thirdDayEl.append(thirdDayPic);
             // third day date
             var thirdDayDate = new Date(data.daily[3].dt * 1000);
@@ -205,7 +208,7 @@ function getForecast(link) {
             var thirdDate = document.createElement('p');
             thirdDate.textContent = 
             "(" + thirdDayMonth + "/" + thirdDayDay + "/" + thirdDayYear + ")";
-            thirdDate.setAttribute('class', 'text-white');
+            thirdDate.setAttribute('class', 'text-white text-center');
             thirdDayEl.append(thirdDate);
             // third day temp
             var thirdDayTemp = document.createElement('p');
@@ -227,6 +230,7 @@ function getForecast(link) {
             let fourthDayPicVal = data.daily[4].weather[0].icon;
             fourthDayPic.setAttribute('src', 'https://openweathermap.org/img/wn/' + fourthDayPicVal + '@2x.png');
             fourthDayPic.setAttribute('alt', data.daily[4].weather[0].description);
+            fourthDayPic.setAttribute('class', 'mx-auto d-block');
             fourthDayEl.append(fourthDayPic);
             // fourth day date
             var fourthDayDate = new Date(data.daily[4].dt * 1000);
@@ -236,7 +240,7 @@ function getForecast(link) {
             var fourthDate = document.createElement('p');
             fourthDate.textContent = 
             "(" + fourthDayMonth + "/" + fourthDayDay + "/" + fourthDayYear + ")";
-            fourthDate.setAttribute('class', 'text-white');
+            fourthDate.setAttribute('class', 'text-white text-center');
             fourthDayEl.append(fourthDate);
             // fourth day temp
             var fourthDayTemp = document.createElement('p');
